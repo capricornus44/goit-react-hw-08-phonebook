@@ -9,7 +9,7 @@ import {
   deleteContactRequest,
   deleteContactSuccess,
   deleteContactError,
-} from '../actions/contact-action';
+} from './contact-actions';
 
 export const getContacts = () => async dispatch => {
   dispatch(getContactsRequest());

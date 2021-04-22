@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { filterContact } from '../../redux/phonebook/actions/contact-action';
-import { filterSelector } from '../../redux/phonebook/selectors/contact-selectors';
+import { filterContact } from '../../redux/phonebook/contact-actions';
+import { filterSelector } from '../../redux/phonebook/contact-selectors';
 import './Filter.scss';
 
 const Filter = ({ filter, filterContact }) => {

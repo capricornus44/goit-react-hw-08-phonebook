@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './phonebook/reducers/root-reducer';
+import rootReducer from './phonebook/root-reducer';
 
 const store = configureStore({
   reducer: { contacts: rootReducer },

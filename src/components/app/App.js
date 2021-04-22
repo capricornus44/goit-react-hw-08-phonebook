@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { ToastContainer } from 'react-toastify';
-import { getContacts } from '../../redux/phonebook/operations/contacts-operations';
-import { itemsSelector } from '../../redux/phonebook/selectors/contact-selectors';
+import { getContacts } from '../../redux/phonebook/contact-operations';
+import { itemsSelector } from '../../redux/phonebook/contact-selectors';
 import Form from '../form/Form';
 import Filter from '../filter/Filter';
 import ContactList from '../contactList/ContactList';
@@ -70,6 +70,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   onGetContacts: getContacts,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

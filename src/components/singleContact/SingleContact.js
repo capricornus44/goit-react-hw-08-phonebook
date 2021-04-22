@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteContact } from '../../redux/phonebook/operations/contacts-operations';
-import { getContactById } from '../../redux/phonebook/selectors/contact-selectors';
+import { deleteContact } from '../../redux/phonebook/contact-operations';
+import { getContactById } from '../../redux/phonebook/contact-selectors';
 import './SingleContact.scss';
 
 const SingleContact = ({ name, number, deleteContact }) => {
