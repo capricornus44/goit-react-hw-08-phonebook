@@ -1,4 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 import {
   getContactsSuccess,
   addContactSuccess,
@@ -17,4 +18,7 @@ const filter = createReducer('', {
   [filterContact]: (_, { payload }) => payload,
 });
 
-export { items, filter };
+export default combineReducers({
+  items,
+  filter,
+});
