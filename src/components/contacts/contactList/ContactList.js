@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { getFilteredContact } from '../../redux/phonebook/contact-selectors';
+import { getFilteredContact } from '../../../redux/phonebook/contact-selectors';
 import SingleContact from '../singleContact/SingleContact';
 import './ContactList.scss';
 

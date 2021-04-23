@@ -4,10 +4,10 @@ import { CSSTransition } from 'react-transition-group';
 import { ToastContainer } from 'react-toastify';
 import { getContacts } from '../../redux/phonebook/contact-operations';
 import { itemsSelector } from '../../redux/phonebook/contact-selectors';
-import Form from '../../components/form/Form';
-import Filter from '../../components/filter/Filter';
-import ContactList from '../../components/contactList/ContactList';
-import './Contacts.scss';
+import Form from '../../components/contacts/form/Form';
+import Filter from '../../components/contacts/filter/Filter';
+import ContactList from '../../components/contacts/contactList/ContactList';
+import './ContactsPage.scss';
 
 class Contacts extends Component {
   state = {

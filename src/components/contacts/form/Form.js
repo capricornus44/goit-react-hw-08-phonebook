@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
-import { addContact } from '../../redux/phonebook/contact-operations';
+import { addContact } from '../../../redux/phonebook/contact-operations';
 import {
   filterSelector,
   itemsSelector,
-} from '../../redux/phonebook/contact-selectors';
+} from '../../../redux/phonebook/contact-selectors';
 import 'react-toastify/dist/ReactToastify.css';
 import './Form.scss';
 
