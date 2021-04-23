@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import ContactsPage from '../../pages/contacts/ContactsPage';
+import Header from '../header/Header';
+import Main from '../main/Main';
 
 class App extends Component {
   render() {
-    return <ContactsPage />;
+    return (
+      <>
+        <Header />
+        <Main />
+      </>
+    );
   }
 }
 

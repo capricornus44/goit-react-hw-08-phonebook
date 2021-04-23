@@ -48,3 +48,11 @@ img {
   width: 100%;
   height: auto;
 }
+
+.loader {
+  margin-top: 150px;
+  text-align: center;
+  font-size: 30px;
+
+  color: #3f51b5;
+}

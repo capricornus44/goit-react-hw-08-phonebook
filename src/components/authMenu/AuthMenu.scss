@@ -1,0 +1,23 @@
+.auth_list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.auth_item:not(:last-child) {
+  margin-right: 25px;
+}
+
+.auth_link {
+  font-size: 1.25rem;
+  color: red;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:focus,
+  &:hover,
+  &:active {
+    outline: none;
+    color: #f1392d;
+    transition: all 350ms;
+  }
+}
