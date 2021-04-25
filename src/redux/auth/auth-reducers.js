@@ -11,6 +11,8 @@ import {
   getCurrentUserError,
 } from './auth-actions';
 
+import storage from 'redux-persist/lib/storage'; //
+
 const initUserState = {
   name: '',
   email: '',
@@ -51,6 +53,12 @@ const isAuthenticated = createReducer(false, {
   [getCurrentUserError]: () => false,
   [logoutSuccess]: () => false,
 });
+
+export const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+}; //
 
 export default combineReducers({
   user,
