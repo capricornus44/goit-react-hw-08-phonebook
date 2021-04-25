@@ -11,11 +11,15 @@ import {
   deleteContactError,
 } from './contact-actions';
 
-export const getContacts = () => async dispatch => {
+export const getContacts = () => async (dispatch, getState) => {
+  const {
+    user: { localId },
+  } = getState().auth;
+
   dispatch(getContactsRequest());
   try {
     const response = await axios.get(
-      `https://phonebook-react-default-rtdb.firebaseio.com/contacts.json`,
+      `https://phonebook-react-default-rtdb.firebaseio.com/users/${localId}/contacts.json`,
     );
     if (response.data) {
       const contacts = Object.keys(response.data).map(key => ({
@@ -29,11 +33,15 @@ export const getContacts = () => async dispatch => {
   }
 };
 
-export const addContact = contact => async dispatch => {
+export const addContact = contact => async (dispatch, getState) => {
+  const {
+    user: { localId },
+  } = getState().auth;
+
   dispatch(addContactRequest());
   try {
     const response = await axios.post(
-      `https://phonebook-react-default-rtdb.firebaseio.com/contacts.json`,
+      `https://phonebook-react-default-rtdb.firebaseio.com/users/${localId}/contacts.json`,
       contact,
     );
     response.data &&
@@ -43,11 +51,15 @@ export const addContact = contact => async dispatch => {
   }
 };
 
-export const deleteContact = id => async dispatch => {
+export const deleteContact = id => async (dispatch, getState) => {
+  const {
+    user: { localId },
+  } = getState().auth;
+
   dispatch(deleteContactRequest());
   try {
     await axios.delete(
-      `https://phonebook-react-default-rtdb.firebaseio.com/contacts/${id}.json`,
+      `https://phonebook-react-default-rtdb.firebaseio.com//users/${localId}/contacts/${id}.json`,
     );
     dispatch(deleteContactSuccess(id));
   } catch (error) {
