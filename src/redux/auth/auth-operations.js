@@ -6,22 +6,11 @@ import {
   signinRequest,
   signinSuccess,
   signinError,
-  //   logoutRequest,
-  //   logoutSuccess,
-  //   logoutError,
+
   // getCurrentUserRequest,
   // getCurrentUserSuccess,
   // getCurrentUserError,
 } from './auth-actions';
-
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = '';
-//   },
-// };
 
 const signup = user => async dispatch => {
   dispatch(signupRequest());
@@ -31,7 +20,9 @@ const signup = user => async dispatch => {
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCNA3Vo4X92zDlQt4W6-FnwrXBbbRb3OP0`,
       { ...user, returnSecureToken: true },
     );
-    // token.set(response.data.token);
+    axios.defaults.params = {
+      auth: response.data.idToken,
+    };
     dispatch(signupSuccess(response.data));
   } catch (error) {
     dispatch(signupError(error.message));
@@ -46,26 +37,14 @@ const signin = user => async dispatch => {
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCNA3Vo4X92zDlQt4W6-FnwrXBbbRb3OP0`,
       { ...user, returnSecureToken: true },
     );
-
-    // token.set(response.data.token);
+    axios.defaults.params = {
+      auth: response.data.idToken,
+    };
     dispatch(signinSuccess(response.data));
   } catch (error) {
     dispatch(signinError(error.message));
   }
 };
-
-// const logout = () => async dispatch => {
-//   dispatch(logoutRequest());
-
-//   try {
-//     await axios.post(`/users/logout`);
-
-//     // token.unset();
-//     dispatch(logoutSuccess());
-//   } catch (error) {
-//     dispatch(logoutError(error.message));
-//   }
-// };
 
 // const getCurrentUser = () => async (dispatch, getState) => {
 //   const {
@@ -90,6 +69,6 @@ const signin = user => async dispatch => {
 export {
   signup,
   signin,
-  // logout,
+
   // getCurrentUser,
 };
