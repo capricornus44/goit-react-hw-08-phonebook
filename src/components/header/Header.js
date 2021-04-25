@@ -1,17 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NavigationList from '../navigation/NavigationList';
+import AuthMenu from '../authMenu/AuthMenu';
+import UserMenu from '../userMenu/UserMenu';
 import { mainRoutes } from '../../routes/mainRoutes';
+import { authRoutes } from '../../routes/authRoutes';
 import './Header.scss';
+import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
 
-const Header = () => {
+const Header = ({ isAuthenticated }) => {
   return (
     <header className="header">
       <nav className="navigation">
         <NavigationList routes={mainRoutes} />
       </nav>
-      <h1>gjsgf</h1>
+      {isAuthenticated ? <UserMenu /> : <AuthMenu routes={authRoutes} />}
     </header>
   );
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  isAuthenticated: getIsAuthenticated(state),
+});
+
+export default connect(mapStateToProps)(Header);
