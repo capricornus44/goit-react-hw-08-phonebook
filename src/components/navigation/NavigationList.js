@@ -41,16 +41,3 @@ const NavigationList = ({ routes }) => {
 };
 
 export default NavigationList;
-
-//map(({ name, path, exact }) => (
-//   <li key={path} className="navigation_item">
-//     <NavLink
-//       exact={exact}
-//       to={path}
-//       className="navigation_link"
-//       activeClassName="navigation_link--active"
-//     >
-//       {name}
-//     </NavLink>
-//   </li>
-// ))

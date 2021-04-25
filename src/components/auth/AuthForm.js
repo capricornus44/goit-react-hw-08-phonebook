@@ -83,14 +83,14 @@ class AuthForm extends Component {
 
           {this.isSignupForm() ? (
             <p className="auth-form_info">
-              * If you already have an account, please
+              If you already have an account, please
               <NavLink to="/signin" className="auth-form_redirect">
                 Sign in
               </NavLink>
             </p>
           ) : (
             <p className="auth-form_info">
-              * If you havn't got an account yet, please
+              If you havn't got an account yet, please
               <NavLink to="/signup" className="auth-form_redirect">
                 Sign up
               </NavLink>
