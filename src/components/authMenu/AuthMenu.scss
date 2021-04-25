@@ -1,21 +1,25 @@
-.auth_list {
+.auth-menu_list {
   display: flex;
   justify-content: space-between;
 }
 
-.auth_item:not(:last-child) {
+.auth-menu_item:not(:last-child) {
   margin-right: 25px;
 }
 
-.auth_link {
+.auth-menu_link {
   font-size: 1.25rem;
-  color: red;
+  color: #ffffff;
   text-decoration: none;
   text-transform: uppercase;
+  white-space: nowrap;
+
+  &--active {
+    color: #f1392d;
+  }
 
   &:focus,
-  &:hover,
-  &:active {
+  &:hover {
     outline: none;
     color: #f1392d;
     transition: all 350ms;
