@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signin, signup } from '../../redux/auth/auth-operations';
 import './AuthForm.scss';
 
 class AuthForm extends Component {
@@ -18,24 +20,29 @@ class AuthForm extends Component {
     e.preventDefault();
     const { email, password, name } = this.state;
 
-    this.isRegistrationForm()
-      ? this.props.registrationOperation({ email, password, name })
-      : this.props.loginOperation({ email, password });
+    this.isSignupForm()
+      ? this.props.signup({ email, password, name })
+      : this.props.signin({ email, password });
+
+    this.setState({
+      email: '',
+      password: '',
+    });
   };
 
-  isRegistrationForm = () => {
-    return this.props.location.pathname === '/signup';
+  isSignupForm = () => {
+    return this.props.match.url === '/signup';
   };
 
   render() {
     return (
       <>
         <h1 className="auth-page_desc">
-          Please, &ensp;
-          {this.isRegistrationForm() ? 'sign up' : 'sign in'}!
+          {this.isSignupForm() ? 'Registration form' : 'Authorization form'}
         </h1>
-        <form className="auth-form">
-          {this.isRegistrationForm() && (
+
+        <form className="auth-form" onSubmit={this.onHandleSubmit}>
+          {this.isSignupForm() && (
             <label className="auth-form_label">
               Name:
               <input
@@ -51,34 +58,48 @@ class AuthForm extends Component {
           <label className="auth-form_label">
             Email:
             <input
-              type="text"
+              type="email"
               name="email"
               value={this.state.email}
-              autoComplete="off"
+              // autoComplete="off"
               onChange={this.onHandleChange}
               className="auth-form_input"
             />
           </label>
-
           <label className="auth-form_label">
             Password:
             <input
               type="text"
               name="password"
               value={this.state.password}
-              autoComplete="off"
+              // autoComplete="off"
               onChange={this.onHandleChange}
               className="auth-form_input"
             />
           </label>
-
           <button type="submit" className="auth-form_button">
-            {this.isRegistrationForm() ? 'sign up' : 'sign in'}
+            {this.isSignupForm() ? 'sign up' : 'sign in'}
           </button>
+
+          {this.isSignupForm() ? (
+            <p className="auth-form_info">
+              * If you already have an account, please
+              <NavLink to="/signin" className="auth-form_redirect">
+                Sign in
+              </NavLink>
+            </p>
+          ) : (
+            <p className="auth-form_info">
+              * If you havn't got an account yet, please
+              <NavLink to="/signup" className="auth-form_redirect">
+                Sign up
+              </NavLink>
+            </p>
+          )}
         </form>
       </>
     );
   }
 }
 
-export default withRouter(AuthForm);
+export default connect(null, { signup, signin })(withRouter(AuthForm));
