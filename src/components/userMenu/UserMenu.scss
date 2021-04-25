@@ -1,0 +1,32 @@
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user_avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+}
+
+.user_greeting {
+  font-size: 20px;
+  margin-right: 32px;
+  white-space: nowrap;
+}
+
+.user_logout-btn {
+  width: 75px;
+  height: 32px;
+  border: 1px solid #3645ab;
+  border-radius: 5px;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    color: #ffffff;
+    background-color: #f1392d;
+  }
+}
