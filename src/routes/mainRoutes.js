@@ -5,32 +5,42 @@ export const mainRoutes = [
     path: '/',
     name: 'Home',
     exact: true,
-    component: lazy(() => import('../pages/homePage/HomePage')),
-    private: false,
-    restricted: false,
+    component: lazy(() =>
+      import('../pages/homePage/HomePage' /* webpackChunkName: "Home" */),
+    ),
+    isPrivate: false,
+    isRestricted: false,
   },
   {
     path: '/contacts',
     name: 'Contacts',
     exact: false,
-    component: lazy(() => import('../pages/contactsPage/ContactsPage')),
-    private: true,
-    restricted: false,
+    component: lazy(() =>
+      import(
+        '../pages/contactsPage/ContactsPage' /* webpackChunkName: "Contacts" */
+      ),
+    ),
+    isPrivate: true,
+    isRestricted: false,
   },
-  // {
-  //   path: '/signup',
-  //   name: 'Sign Up',
-  //   exact: false,
-  //   component: lazy(() => import('../components/auth/AuthForm')),
-  //   private: false,
-  //   restricted: true,
-  // },
-  // {
-  //   path: '/signin',
-  //   name: 'Sign In',
-  //   exact: false,
-  //   component: lazy(() => import('../components/auth/AuthForm')),
-  //   private: false,
-  //   restricted: true,
-  // },
+  {
+    path: '/signup',
+    name: 'Sign Up',
+    exact: false,
+    component: lazy(() =>
+      import('../pages/authPage/AuthPage' /* webpackChunkName: "Register" */),
+    ),
+    isPrivate: false,
+    isRestricted: true,
+  },
+  {
+    path: '/signin',
+    name: 'Sign In',
+    exact: false,
+    component: lazy(() =>
+      import('../pages/authPage/AuthPage' /* webpackChunkName: "Login" */),
+    ),
+    isPrivate: false,
+    isRestricted: true,
+  },
 ];

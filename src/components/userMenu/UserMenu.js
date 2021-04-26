@@ -9,7 +9,11 @@ const UserMenu = ({ email, avatar, logoutSuccess }) => (
   <div className="user">
     <img src={avatar} alt="" width="32px" className="user_avatar" />
     <span className="user_greeting">{email}</span>
-    <button type="button" onClick={logoutSuccess} className="user_logout-btn">
+    <button
+      type="button"
+      onClick={() => logoutSuccess()}
+      className="user_logout-btn"
+    >
       Logout
     </button>
   </div>
@@ -19,9 +23,5 @@ const mapStateToProps = state => ({
   email: getUsername(state),
   avatar: avatar,
 });
-
-// const mapDispatchToProps = {
-//   // onLogout: logout,
-// };
 
 export default connect(mapStateToProps, { logoutSuccess })(UserMenu);

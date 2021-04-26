@@ -1,43 +1,26 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
+// import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+// import { NavLink } from 'react-router-dom';
+// import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
+// import { logoutSuccess } from '../../redux/auth/auth-actions';
+import NavigationListItem from './NavigationListItem';
+import UserMenu from '../userMenu/UserMenu';
 import './NavigationList.scss';
 
-const NavigationList = ({ routes }) => {
-  const isAuthenticated = useSelector(getIsAuthenticated);
-
+const NavigationList = ({ routes, isAuth }) => {
   return (
     <ul className="navigation_list">
-      {isAuthenticated
-        ? routes.map(({ name, path, exact }) => (
-            <li key={path} className="navigation_item">
-              <NavLink
-                exact={exact}
-                to={path}
-                className="navigation_link"
-                activeClassName="navigation_link--active"
-              >
-                {name}
-              </NavLink>
-            </li>
-          ))
-        : routes
-            .filter(route => !route.private)
-            .map(({ name, path, exact }) => (
-              <li key={path} className="navigation_item">
-                <NavLink
-                  exact={exact}
-                  to={path}
-                  className="navigation_link"
-                  activeClassName="navigation_link--active"
-                >
-                  {name}
-                </NavLink>
-              </li>
-            ))}
+      {routes.map(route => (
+        <NavigationListItem isAuth={isAuth} {...route} key={route.path} />
+      ))}
+      {isAuth && <UserMenu />}
     </ul>
   );
 };
 
-export default NavigationList;
+const mstp = state => ({
+  isAuth: state.auth.user.idToken,
+});
+
+export default connect(mstp)(NavigationList);
