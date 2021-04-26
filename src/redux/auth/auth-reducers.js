@@ -11,29 +11,25 @@ import {
   getCurrentUserError,
 } from './auth-actions';
 
-import storage from 'redux-persist/lib/storage'; //
-
 const initUserState = {
-  name: '',
   email: '',
   idToken: '',
   refreshToken: '',
   localId: '',
-  registered: false,
 };
 
-const user = createReducer(initUserState, {
+export const user = createReducer(initUserState, {
   [signupSuccess]: (_, { payload }) => payload,
   [signinSuccess]: (_, { payload }) => payload,
   [logoutSuccess]: () => initUserState,
   [getCurrentUserSuccess]: (_, { payload }) => payload,
 });
 
-const token = createReducer('', {
-  [signupSuccess]: (_, { payload }) => payload.idToken,
-  [signinSuccess]: (_, { payload }) => payload.idToken,
-  [logoutSuccess]: () => '',
-});
+// const token = createReducer('', {
+//   [signupSuccess]: (_, { payload }) => payload.idToken,
+//   [signinSuccess]: (_, { payload }) => payload.idToken,
+//   [logoutSuccess]: () => '',
+// });
 
 const setError = (_, { payload }) => payload;
 
@@ -44,25 +40,19 @@ const error = createReducer('', {
   [getCurrentUserError]: setError,
 });
 
-const isAuthenticated = createReducer(false, {
-  [signupSuccess]: () => true,
-  [signinSuccess]: () => true,
-  [getCurrentUserSuccess]: () => true,
-  [signupError]: () => false,
-  [signinError]: () => false,
-  [getCurrentUserError]: () => false,
-  [logoutSuccess]: () => false,
-});
-
-export const authPersistConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token'],
-}; //
+// const isAuthenticated = createReducer(false, {
+//   [signupSuccess]: () => true,
+//   [signinSuccess]: () => true,
+//   [getCurrentUserSuccess]: () => true,
+//   [signupError]: () => false,
+//   [signinError]: () => false,
+//   [getCurrentUserError]: () => false,
+//   [logoutSuccess]: () => false,
+// });
 
 export default combineReducers({
   user,
-  isAuthenticated,
-  token,
+  // isAuthenticated,
+  // token,
   error,
 });
