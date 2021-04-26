@@ -1,9 +1,5 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
 import { connect } from 'react-redux';
-// import { NavLink } from 'react-router-dom';
-// import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
-// import { logoutSuccess } from '../../redux/auth/auth-actions';
 import NavigationListItem from './NavigationListItem';
 import UserMenu from '../userMenu/UserMenu';
 import './NavigationList.scss';
@@ -19,8 +15,8 @@ const NavigationList = ({ routes, isAuth }) => {
   );
 };
 
-const mstp = state => ({
+const mapStateToProps = state => ({
   isAuth: state.auth.user.idToken,
 });
 
-export default connect(mstp)(NavigationList);
+export default connect(mapStateToProps)(NavigationList);

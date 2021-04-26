@@ -13,10 +13,9 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { user } from './auth/auth-reducers';
 import contactReducer from './phonebook/contact-reducers';
-
-import storage from 'redux-persist/lib/storage';
 
 const authPersistConfig = {
   key: 'auth',
@@ -24,8 +23,6 @@ const authPersistConfig = {
   storage,
   whitelist: ['idToken', 'email', 'localId', 'refreshToken'],
 };
-
-// import rootReducer from './root-reducer';
 
 const middleware = [
   ...getDefaultMiddleware({

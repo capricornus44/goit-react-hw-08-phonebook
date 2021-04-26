@@ -4,11 +4,7 @@ import PrivateRoute from '../routes/PrivateRoute';
 import PublicRoute from '../routes/PublicRoute';
 import { connect } from 'react-redux';
 
-// import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
-// import { useSelector } from 'react-redux';
-
 const NavigationRoutes = ({ routes, isAuth }) => {
-  // const isAuthenticated = useSelector(getIsAuthenticated);
   return (
     <Suspense fallback={<h2 className="loader">...loading</h2>}>
       <Switch>
@@ -24,5 +20,6 @@ const NavigationRoutes = ({ routes, isAuth }) => {
   );
 };
 
-const mstp = state => ({ isAuth: state.auth.user.idToken });
-export default connect(mstp)(NavigationRoutes);
+const mapStateToProps = state => ({ isAuth: state.auth.user.idToken });
+
+export default connect(mapStateToProps)(NavigationRoutes);

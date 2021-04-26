@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavigationListItem.scss';
-import { useHistory } from 'react-router-dom';
 
 const NavigationListItem = ({
   isAuth,
@@ -11,8 +10,6 @@ const NavigationListItem = ({
   exact,
   name,
 }) => {
-  const history = useHistory();
-
   return (
     <>
       {!isPrivate && !isRestricted && (
@@ -35,10 +32,6 @@ const NavigationListItem = ({
             to={path}
             className="navigation_link"
             activeClassName="navigation_link--active"
-            onClick={() => {
-              history.push('/contacts');
-              console.log('NavLink');
-            }}
           >
             {name}
           </NavLink>

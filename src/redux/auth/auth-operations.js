@@ -31,9 +31,7 @@ const signin = user => async dispatch => {
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCNA3Vo4X92zDlQt4W6-FnwrXBbbRb3OP0`,
       { ...user, returnSecureToken: true },
     );
-    // axios.defaults.params = {
-    //   auth: response.data.idToken,
-    // };
+
     dispatch(signinSuccess(response.data));
   } catch (error) {
     dispatch(signinError(error.message));

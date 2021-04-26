@@ -28,7 +28,7 @@ export const mainRoutes = [
     name: 'Sign Up',
     exact: false,
     component: lazy(() =>
-      import('../pages/authPage/AuthPage' /* webpackChunkName: "Register" */),
+      import('../pages/authPage/AuthPage' /* webpackChunkName: "Sign up" */),
     ),
     isPrivate: false,
     isRestricted: true,
@@ -38,7 +38,7 @@ export const mainRoutes = [
     name: 'Sign In',
     exact: false,
     component: lazy(() =>
-      import('../pages/authPage/AuthPage' /* webpackChunkName: "Login" */),
+      import('../pages/authPage/AuthPage' /* webpackChunkName: "Sign in" */),
     ),
     isPrivate: false,
     isRestricted: true,
