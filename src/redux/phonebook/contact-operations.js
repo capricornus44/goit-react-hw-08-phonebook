@@ -11,16 +11,25 @@ import {
   deleteContactError,
 } from './contact-actions';
 
+const setAuthToken = token => {
+  axios.defaults.params = {
+    auth: token,
+  };
+};
+
 export const getContacts = () => async (dispatch, getState) => {
   const {
-    user: { localId },
+    user: { localId, idToken },
   } = getState().auth;
 
   dispatch(getContactsRequest());
+  setAuthToken(idToken);
+
   try {
     const response = await axios.get(
       `https://phonebook-react-default-rtdb.firebaseio.com/users/${localId}/contacts.json`,
     );
+
     if (response.data) {
       const contacts = Object.keys(response.data).map(key => ({
         id: key,
