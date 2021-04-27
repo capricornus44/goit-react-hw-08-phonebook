@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import NavigationListItem from './NavigationListItem';
-import UserMenu from '../userMenu/UserMenu';
+import NavigationListItem from '../navigation-list-item/NavigationListItem';
+import UserMenu from '../../user-menu/UserMenu';
 import './NavigationList.scss';
 
 const NavigationList = ({ routes, isAuth }) => {

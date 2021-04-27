@@ -1,6 +1,6 @@
 import React from 'react';
-import NavigationList from '../navigation/NavigationList';
-import { mainRoutes } from '../../routes/mainRoutes';
+import NavigationList from '../navigation/navigation-list/NavigationList';
+import { mainRoutes } from '../../routes/main-routes';
 import './Header.scss';
 
 const Header = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { mainRoutes } from '../../routes/mainRoutes';
-import NavigationRoutes from '../navigation/NavigationRoutes';
+import { mainRoutes } from '../../routes/main-routes';
+import NavigationRoutes from '../navigation/navigation-routes/NavigationRoutes';
 
 const Main = () => {
   return (

@@ -1,7 +1,3 @@
-.navigation_item:not(:last-child) {
-  margin-right: 50px;
-}
-
 .navigation_link {
   font-size: 1.25rem;
   color: #ffffff;
@@ -18,4 +14,17 @@
     color: #f1392d;
     transition: all 350ms;
   }
+}
+
+.home-item {
+  margin-right: 50px;
+}
+
+// .contacts-item {
+//   margin-left: 50px;
+// }
+
+.auth-item:not(:last-child) {
+  margin-right: 50px;
+  margin-left: auto;
 }

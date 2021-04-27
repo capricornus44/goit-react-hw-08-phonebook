@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import { Switch } from 'react-router-dom';
-import PrivateRoute from '../routes/PrivateRoute';
-import PublicRoute from '../routes/PublicRoute';
+import PrivateRoute from '../../routes/PrivateRoute';
+import PublicRoute from '../../routes/PublicRoute';
 import { connect } from 'react-redux';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../../spinner/Spinner';
 
 const NavigationRoutes = ({ routes, isAuth }) => {
   return (

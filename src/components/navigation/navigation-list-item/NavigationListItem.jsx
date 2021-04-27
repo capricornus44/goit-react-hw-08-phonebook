@@ -13,7 +13,7 @@ const NavigationListItem = ({
   return (
     <>
       {!isPrivate && !isRestricted && (
-        <li key={path} className="navigation_item">
+        <li key={path} className="navigation_item home-item">
           <NavLink
             exact={exact}
             to={path}
@@ -26,7 +26,7 @@ const NavigationListItem = ({
       )}
 
       {isAuth && isPrivate && !isRestricted && (
-        <li key={path} className="navigation_item">
+        <li key={path} className="navigation_item contacts-item">
           <NavLink
             exact={exact}
             to={path}
@@ -39,7 +39,7 @@ const NavigationListItem = ({
       )}
 
       {!isAuth && !isPrivate && isRestricted && (
-        <li key={path} className="navigation_item">
+        <li key={path} className="navigation_item auth-item">
           <NavLink
             exact={exact}
             to={path}

@@ -42,26 +42,13 @@ class AuthForm extends Component {
         </h1>
 
         <form className="auth-form" onSubmit={this.onHandleSubmit}>
-          {this.isSignupForm() && (
-            <label className="auth-form_label">
-              Name:
-              <input
-                type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.onHandleChange}
-                className="auth-form_input"
-              />
-            </label>
-          )}
-
           <label className="auth-form_label">
             Email:
             <input
               type="email"
               name="email"
               value={this.state.email}
-              // autoComplete="off"
+              autoComplete="off"
               onChange={this.onHandleChange}
               className="auth-form_input"
             />
@@ -72,7 +59,7 @@ class AuthForm extends Component {
               type="text"
               name="password"
               value={this.state.password}
-              // autoComplete="off"
+              autoComplete="off"
               onChange={this.onHandleChange}
               className="auth-form_input"
             />
