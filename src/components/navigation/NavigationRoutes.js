@@ -3,10 +3,11 @@ import { Switch } from 'react-router-dom';
 import PrivateRoute from '../routes/PrivateRoute';
 import PublicRoute from '../routes/PublicRoute';
 import { connect } from 'react-redux';
+import Spinner from '../spinner/Spinner';
 
 const NavigationRoutes = ({ routes, isAuth }) => {
   return (
-    <Suspense fallback={<h2 className="loader">...loading</h2>}>
+    <Suspense fallback={<Spinner />}>
       <Switch>
         {routes.map(route =>
           route.isPrivate ? (
