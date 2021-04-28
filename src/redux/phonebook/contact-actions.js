@@ -1,4 +1,4 @@
-import { createAction } from "@reduxjs/toolkit"
+import { createAction } from '@reduxjs/toolkit';
 
 export const getContactsRequest = createAction('@contact/getRequest');
 export const getContactsSuccess = createAction('@contact/getSuccess');
@@ -15,6 +15,3 @@ export const deleteContactError = createAction('@contact/deleteError');
 export const filterContact = createAction('@contact/filter', ({ target }) => ({
   payload: target.value,
 }));
-
-
-

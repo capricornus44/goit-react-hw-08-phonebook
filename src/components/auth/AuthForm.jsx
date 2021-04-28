@@ -1,92 +1,87 @@
-import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { signin, signup } from '../../redux/auth/auth-operations';
 import './AuthForm.scss';
 
-class AuthForm extends Component {
-  state = {
-    email: '',
-    password: '',
-    name: '',
-  };
+const AuthForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const location = useLocation();
+  const dispatch = useDispatch();
 
-  onHandleChange = e => {
+  const handleChange = e => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    if (name === 'email') setEmail(value);
+    if (name === 'password') setPassword(value);
   };
 
-  onHandleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const { email, password, name } = this.state;
 
-    this.isSignupForm()
-      ? this.props.signup({ email, password, name })
-      : this.props.signin({ email, password });
+    isSignupForm()
+      ? dispatch(signup({ email, password }))
+      : dispatch(signin({ email, password }));
 
-    this.setState({
-      email: '',
-      password: '',
-    });
+    setEmail('');
+    setPassword('');
   };
 
-  isSignupForm = () => {
-    return this.props.match.url === '/signup';
+  const isSignupForm = () => {
+    return location.pathname === '/signup';
   };
 
-  render() {
-    return (
-      <>
-        <h1 className="auth-page_desc">
-          {this.isSignupForm() ? 'Registration form' : 'Authorization form'}
-        </h1>
+  return (
+    <>
+      <h1 className="auth-page_desc">
+        {isSignupForm() ? 'Registration form' : 'Authorization form'}
+      </h1>
 
-        <form className="auth-form" onSubmit={this.onHandleSubmit}>
-          <label className="auth-form_label">
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={this.state.email}
-              autoComplete="off"
-              onChange={this.onHandleChange}
-              className="auth-form_input"
-            />
-          </label>
-          <label className="auth-form_label">
-            Password:
-            <input
-              type="text"
-              name="password"
-              value={this.state.password}
-              autoComplete="off"
-              onChange={this.onHandleChange}
-              className="auth-form_input"
-            />
-          </label>
-          <button type="submit" className="auth-form_button">
-            {this.isSignupForm() ? 'sign up' : 'sign in'}
-          </button>
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <label className="auth-form_label">
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={email}
+            // autoComplete="off"
+            onChange={handleChange}
+            className="auth-form_input"
+          />
+        </label>
+        <label className="auth-form_label">
+          Password:
+          <input
+            type="text"
+            name="password"
+            value={password}
+            // autoComplete="off"
+            onChange={handleChange}
+            className="auth-form_input"
+          />
+        </label>
+        <button type="submit" className="auth-form_button">
+          {isSignupForm() ? 'sign up' : 'sign in'}
+        </button>
 
-          {this.isSignupForm() ? (
-            <p className="auth-form_info">
-              If you already have an account, please
-              <NavLink to="/signin" className="auth-form_redirect">
-                Sign in
-              </NavLink>
-            </p>
-          ) : (
-            <p className="auth-form_info">
-              If you havn't got an account yet, please
-              <NavLink to="/signup" className="auth-form_redirect">
-                Sign up
-              </NavLink>
-            </p>
-          )}
-        </form>
-      </>
-    );
-  }
-}
+        {isSignupForm() ? (
+          <p className="auth-form_info">
+            If you already have an account, please
+            <NavLink to="/signin" className="auth-form_redirect">
+              Sign in
+            </NavLink>
+          </p>
+        ) : (
+          <p className="auth-form_info">
+            If you havn't got an account yet, please
+            <NavLink to="/signup" className="auth-form_redirect">
+              Sign up
+            </NavLink>
+          </p>
+        )}
+      </form>
+    </>
+  );
+};
 
-export default connect(null, { signup, signin })(withRouter(AuthForm));
+export default AuthForm;

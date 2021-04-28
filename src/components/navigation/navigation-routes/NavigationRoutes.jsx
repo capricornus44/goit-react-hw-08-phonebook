@@ -2,10 +2,13 @@ import React, { Suspense } from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../../routes/PrivateRoute';
 import PublicRoute from '../../routes/PublicRoute';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Spinner from '../../spinner/Spinner';
+import { isAuthSelector } from '../../../redux/auth/auth-selectors';
 
-const NavigationRoutes = ({ routes, isAuth }) => {
+const NavigationRoutes = ({ routes }) => {
+  const isAuth = useSelector(isAuthSelector);
+
   return (
     <Suspense fallback={<Spinner />}>
       <Switch>
@@ -21,6 +24,4 @@ const NavigationRoutes = ({ routes, isAuth }) => {
   );
 };
 
-const mapStateToProps = state => ({ isAuth: state.auth.user.idToken });
-
-export default connect(mapStateToProps)(NavigationRoutes);
+export default NavigationRoutes;

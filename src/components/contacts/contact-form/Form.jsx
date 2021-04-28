@@ -1,99 +1,82 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { addContact } from '../../../redux/phonebook/contact-operations';
-import {
-  filterSelector,
-  itemsSelector,
-} from '../../../redux/phonebook/contact-selectors';
+import { itemsSelector } from '../../../redux/phonebook/contact-selectors';
 import 'react-toastify/dist/ReactToastify.css';
 import './Form.scss';
 
-const initState = {
-  name: '',
-  number: '',
-};
+const Form = () => {
+  // const [state, setState] = useState(initState);
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const contacts = useSelector(itemsSelector);
+  const dispatch = useDispatch();
 
-class Form extends Component {
-  state = {
-    ...initState,
-  };
-
-  handlerChange = ({ target }) => {
+  const handlerChange = ({ target }) => {
     const { value, name } = target;
-    this.setState({ [name]: value });
+    if (name === 'name') setName(value);
+    if (name === 'number') setNumber(value);
   };
 
-  handlerSubmit = event => {
-    event.preventDefault();
+  const handlerSubmit = e => {
+    e.preventDefault();
 
-    const { name, number } = this.state;
     const contact = { name, number };
-    const { contacts } = this.props;
     const isExists = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase(),
     );
 
     if (isExists) {
       toast.error('This contact is already exist');
-      return this.setState({ ...initState });
+      setName('');
+      setNumber('');
+      return;
     }
 
-    this.props.addContact(contact);
-    this.setState({ ...initState });
+    dispatch(addContact(contact));
+    setName('');
+    setNumber('');
   };
 
-  render() {
-    const { name, number } = this.state;
-
-    return (
-      <>
-        <form className="form" onSubmit={this.handlerSubmit}>
-          <label className="form_label">
-            Name
-            <input
-              className="form_input"
-              type="text"
-              name="name"
-              value={name}
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              placeholder="John Smith"
-              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-              required
-              onChange={this.handlerChange}
-            />
-          </label>
-          <label className="form_label">
-            Number
-            <input
-              className="form_input"
-              type="tel"
-              name="number"
-              value={number}
-              pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{3})"
-              placeholder="+48-796-287-373"
-              title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
-              required
-              onChange={this.handlerChange}
-            />
-          </label>
-          <button type="submit" className="form_button">
-            Add contact
-          </button>
-        </form>
-      </>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  contacts: itemsSelector(state),
-  filter: filterSelector(state),
-});
-
-const mapDispatchToProps = {
-  addContact,
+  return (
+    <>
+      <form className="form" onSubmit={handlerSubmit}>
+        <label className="form_label">
+          Name
+          <input
+            className="form_input"
+            type="text"
+            name="name"
+            value={name}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            placeholder="John Smith"
+            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            required
+            onChange={handlerChange}
+          />
+        </label>
+        <label className="form_label">
+          Number
+          <input
+            className="form_input"
+            type="tel"
+            name="number"
+            value={number}
+            pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{3})"
+            placeholder="+48-796-287-373"
+            title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
+            required
+            onChange={handlerChange}
+          />
+        </label>
+        <button type="submit" className="form_button">
+          Add contact
+        </button>
+      </form>
+    </>
+  );
 };
 
 Form.propTypes = {
@@ -103,9 +86,9 @@ Form.propTypes = {
       id: PropTypes.string,
       number: PropTypes.string,
     }),
-  ).isRequired,
-  filter: PropTypes.string.isRequired,
-  addContact: PropTypes.func.isRequired,
+  ),
+  filter: PropTypes.string,
+  addContact: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default Form;

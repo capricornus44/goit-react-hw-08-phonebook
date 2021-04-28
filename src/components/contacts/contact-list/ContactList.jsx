@@ -1,29 +1,25 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { getFilteredContact } from '../../../redux/phonebook/contact-selectors';
 import SingleContact from '../single-contact/SingleContact';
 import './ContactList.scss';
 
-const ContactList = ({ contacts }) => {
+const ContactList = () => {
+  const contacts = useSelector(getFilteredContact);
+
   return (
     <TransitionGroup component="ul" className="contact_list">
-      {contacts.map(({ id }) => (
+      {contacts.map(({ id, name, number }) => (
         <CSSTransition key={id} classNames="list_item" timeout={250}>
-          <SingleContact id={id} />
+          <SingleContact id={id} name={name} number={number} />
         </CSSTransition>
       ))}
     </TransitionGroup>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    contacts: getFilteredContact(state),
-  };
-};
-
-export default connect(mapStateToProps)(ContactList);
+export default ContactList;
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -32,5 +28,5 @@ ContactList.propTypes = {
       id: PropTypes.string,
       number: PropTypes.string,
     }),
-  ).isRequired,
+  ),
 };

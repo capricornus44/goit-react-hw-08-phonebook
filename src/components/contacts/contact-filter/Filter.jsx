@@ -1,10 +1,16 @@
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { filterContact } from '../../../redux/phonebook/contact-actions';
 import { filterSelector } from '../../../redux/phonebook/contact-selectors';
 import './Filter.scss';
 
-const Filter = ({ filter, filterContact }) => {
+const Filter = () => {
+  const filter = useSelector(filterSelector);
+  const dispatch = useDispatch();
+
+  const onFilterContact = event => {
+    dispatch(filterContact(event));
+  };
   return (
     <div className="filter_container">
       <label className="filter_label">
@@ -15,22 +21,14 @@ const Filter = ({ filter, filterContact }) => {
           name="filter"
           placeholder="Find contacts by name"
           value={filter}
-          onChange={filterContact}
+          onChange={onFilterContact}
         />
       </label>
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  filter: filterSelector(state),
-});
-
-const mapDispatchToProps = {
-  filterContact,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;
 
 Filter.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -40,6 +38,6 @@ Filter.propTypes = {
       number: PropTypes.string,
     }).isRequired,
   ),
-  filter: PropTypes.string.isRequired,
-  filterContact: PropTypes.func.isRequired,
+  filter: PropTypes.string,
+  filterContact: PropTypes.func,
 };
