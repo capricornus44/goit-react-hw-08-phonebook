@@ -28,16 +28,19 @@ const Form = () => {
       contact => contact.name.toLowerCase() === name.toLowerCase(),
     );
 
-    if (isExists) {
-      toast.error('This contact is already exist');
+    const reset = () => {
       setName('');
       setNumber('');
+    };
+
+    if (isExists) {
+      toast.error('This contact is already exist');
+      reset();
       return;
     }
 
     dispatch(addContact(contact));
-    setName('');
-    setNumber('');
+    reset();
   };
 
   return (
