@@ -1,5 +1,14 @@
+.home_wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 24px;
+  background-image: url('../../images/home-bg.jpg');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 .home_title {
-  margin-top: 40px;
   font-size: 50px;
   text-align: center;
   color: #ffffff;
